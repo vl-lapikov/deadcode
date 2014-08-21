@@ -5,3 +5,5 @@ sync.sh~
 .settings
 .cproject
 .project
+.externalToolBuilders/
+Release/
