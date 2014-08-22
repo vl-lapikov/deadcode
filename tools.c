@@ -1,5 +1,4 @@
-#include <Zend/zend.h>
-#include <Zend/zend_compile.h>
+#include "zend_extensions.h"
 
 void dump_op_array(char * type, zend_op_array *op_array )
 {
@@ -38,7 +37,23 @@ void dump_op_array(char * type, zend_op_array *op_array )
 	zend_printf("\n");
 }
 
+char* get_opcode(int opcode_number) {
+	switch (opcode_number) {
+		case ZEND_DO_FCALL:
+			return "DO_FCALL";
+		case ZEND_DO_FCALL_BY_NAME:
+			return "DO_FCALL_BY_NAME";
+		default:
+			return "UNKNOWN";
+	}
+}
+
 void mark_line(char * function, zend_execute_data *execute_data TSRMLS_DC) {
-	zend_printf("From %s: %s (line %d)\n", function, execute_data->op_array->filename, execute_data->opline->lineno);
+	zend_printf(
+		"%s (line %d)\nOPCODE: %s\n",
+		execute_data->op_array->filename,
+		execute_data->opline->lineno,
+		get_opcode(execute_data->opline->opcode)
+	);
 }
 
