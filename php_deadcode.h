@@ -21,27 +21,6 @@
 #include "Zend/zend_API.h"
 #endif
 
-/* execution redirection functions */
-zend_op_array* (*old_compile_file)(zend_file_handle* file_handle, int type TSRMLS_DC);
-zend_op_array* deadcode_compile_file(zend_file_handle*, int TSRMLS_DC);
-
-zend_op_array* (*old_compile_string)(zend_file_handle* file_handle, int type TSRMLS_DC);
-zend_op_array* deadcode_compile_string(zend_file_handle*, int TSRMLS_DC);
-
-#if PHP_VERSION_ID < 50500
-void (*deadcode_old_execute)(zend_op_array *op_array TSRMLS_DC);
-void deadcode_execute(zend_op_array *op_array TSRMLS_DC);
-
-void (*deadcode_old_execute_internal)(zend_execute_data *current_execute_data, int return_value_used TSRMLS_DC);
-void deadcode_execute_internal(zend_execute_data *current_execute_data, int return_value_used TSRMLS_DC);
-#else
-void (*deadcode_old_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
-void deadcode_execute_ex(zend_execute_data *execute_data TSRMLS_DC);
-
-void (*deadcode_old_execute_internal)(zend_execute_data *current_execute_data, struct _zend_fcall_info *fci, int return_value_used TSRMLS_DC);
-void deadcode_execute_internal(zend_execute_data *current_execute_data, struct _zend_fcall_info *fci, int return_value_used TSRMLS_DC);
-#endif
-
 int deadcode_common_override_handler(ZEND_OPCODE_HANDLER_ARGS);
 
 /* Needed for code coverage as Zend doesn't always add EXT_STMT when expected */
