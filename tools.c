@@ -50,9 +50,11 @@ char* get_opcode(int opcode_number) {
 
 void mark_line(char * function, zend_execute_data *execute_data TSRMLS_DC) {
 	zend_printf(
-		"%s (line %d)\nOPCODE: %s\n",
+		"%s (line %d) %s::%s\nOPCODE: %s\n",
 		execute_data->op_array->filename,
 		execute_data->opline->lineno,
+		execute_data->call->fbc->op_array.scope->name,
+		execute_data->call->fbc->op_array.function_name,
 		get_opcode(execute_data->opline->opcode)
 	);
 }
