@@ -1,0 +1,8 @@
+{
+    "name": "vlapikov/php-deadcode-analyze",
+    "description": "Analyze dump produced by deadcode-extension",
+    "require": {
+        "phpunit/php-code-coverage": "3.0.*@dev"
+    }
+}
+
